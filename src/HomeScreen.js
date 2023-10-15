@@ -1,10 +1,13 @@
  import React from "react";
  import "./HomeScreen.css";
+ import Nav from "./Nav";
 
  function HomeScreen() {
     return (
-        <div className="homeScreen">Netflix
+        <div className="homeScreen">
             {/* Nav */}
+            <Nav />
+            
             {/* Banner */}
             {/* Row */}
         </div>
