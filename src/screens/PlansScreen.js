@@ -12,9 +12,9 @@ function PlansScreen() {
     const [docID, setDocID] = useState();
     const [subscription, setSubscription] = useState(null);
 
-    useEffect(()=>{
+    useEffect(() => {
         getDocs(collection(db, "customers", user.uid, "subscriptions")).then((querySnapshot) => {
-            querySnapshot.forEach(async (sub)=> {
+            querySnapshot.forEach(async (sub) => {
                 setSubscription({
                     role: sub.data().role,
                     currentPeriodEnd: sub.data().current_period_end.seconds,
@@ -22,7 +22,7 @@ function PlansScreen() {
                 });
             })
         });
-    },[]);
+    }, []);
     //console.log(subscription);
 
     useEffect(() => {
@@ -50,16 +50,52 @@ function PlansScreen() {
         })
             .then(async (snap) => {
                 setDocID(snap.id);
+                const docRef = doc(db, `customers`, `${user.uid}`, `checkout_sessions`, `${docID}`);
+                const docSnap = (await getDoc(docRef)).data();
+                const sessionId = docSnap?.sessionId;
+                const stripe = await loadStripe('pk_test_51O2i6sKN7HBR3gDsJB1SjUSvTCtCZpakf3YWvhoCPPwTNh3Ea48Fo8t3EHSkCgLdBTCKNs9qLHPQKBEA2iO0RHoi00N0ammg2m');
+                stripe.redirectToCheckout({
+                    sessionId: sessionId
+                })
             })
         );
 
-        const docRef = doc(db, `customers`, `${user.uid}`, `checkout_sessions`, `${docID}`);
-        const docSnap = (await getDoc(docRef)).data();
-        const sessionId = docSnap.sessionId;
-        const stripe = await loadStripe('pk_test_51O2i6sKN7HBR3gDsJB1SjUSvTCtCZpakf3YWvhoCPPwTNh3Ea48Fo8t3EHSkCgLdBTCKNs9qLHPQKBEA2iO0RHoi00N0ammg2m');
-        stripe.redirectToCheckout({
-            sessionId: sessionId
-        })
+        // async function createCheckoutSession(db, user, priceId) {
+        //     const docRef = await addDoc(collection(db, "customers", user.uid, "checkout_sessions"), {
+        //         price: priceId,
+        //         success_url: window.location.origin,
+        //         cancel_url: window.location.origin,
+        //     });
+        //     return docRef;
+        // }
+
+        // async function getStripeSession(db, user, docID) {
+        //     const docRef = doc(db, `customers`, `${user.uid}`, `checkout_sessions`, `${docID}`);
+        //     const docSnap = await getDoc(docRef);
+        //     return docSnap.data()?.sessionId;
+        // }
+
+        // async function redirectToCheckout(sessionId) {
+        //     const stripe = await loadStripe('pk_test_51O2i6sKN7HBR3gDsJB1SjUSvTCtCZpakf3YWvhoCPPwTNh3Ea48Fo8t3EHSkCgLdBTCKNs9qLHPQKBEA2iO0RHoi00N0ammg2m');
+        //     stripe.redirectToCheckout({
+        //         sessionId: sessionId
+        //     });
+        // }
+
+        // // Usage
+        // createCheckoutSession(db, user, priceId)
+        //     .then((docRef) => {
+        //         setDocID(docRef.id);
+        //         return getStripeSession(db, user, docRef.id);
+        //     })
+        //     .then((sessionId) => {
+        //         console.log("Session ID: ", sessionId);
+        //         redirectToCheckout(sessionId);
+        //     })
+        //     .catch((error) => {
+        //         console.error("Error creating checkout session: ", error);
+        //     });
+
     };
     return (
         <div className='PlannsScreen'>
@@ -74,7 +110,7 @@ function PlansScreen() {
                                 <h5>{productData.name}</h5>
                                 <h6>{productData.description}</h6>
                             </div>
-                            <button onClick={() => loadCheckout(productData.prices.priceId)}>{isCurrentPackage ? 'Current Package': "Subscribe"}</button>
+                            <button onClick={() => loadCheckout(productData.prices.priceId)}>{isCurrentPackage ? 'Current Package' : "Subscribe"}</button>
                         </div>
                     );
                 }

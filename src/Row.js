@@ -25,22 +25,22 @@ function Row({ title, fetchUrl, islargRow = false }) {
 
                 const posterPath = islargRow ? movie.poster_path : movie.backdrop_path;
                 const posterSize = islargRow ? "rowPosterLarge" : "";
+                const posterImg = islargRow ? "rowPosterLargeImg" : "";
                 const altText = movie?.title || movie?.name || movie?.original_name;
 
                 return (
-                    <>
+                    <div className={`rowPoster ${posterSize}`} key={movie.id}>
                         <img
-                            className={`rowPoster ${posterSize}`}
+                            className={`rowPosterImg ${posterImg}`}
                             src={`${baseURL}${posterPath}`}
                             alt={altText}
                             title={altText}
                         />
                         <h5 className="movieTitle">{altText}</h5>
-                    </>
+                    </div>
                 );
             })}
         </div>
-
 
     </div>
 }

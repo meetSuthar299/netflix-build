@@ -15,12 +15,12 @@
 }
 
 .rowPoster{
-    max-height: 100px;
-    object-fit: contain;
+    max-height: 250px;
     margin-right: 10px;
-    width: 100%;
-    transition: transform 450ms;
-
+    transition: transform 500ms;
+}
+.rowPosterImg{
+    width: 200px;
 }
 
 .rowPoster:hover{
@@ -29,12 +29,5 @@
 }
 
 .rowPosterLarge{
-    max-height: 250px;
-}
-.movieTitle{
-    position: relative;
-    display: flex;
-}
-.movieTitle:hover{
-    opacity: 1;
+    max-height: 350px;
 }
