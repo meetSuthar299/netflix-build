@@ -20,7 +20,7 @@ Visit the site here:
   password: 123456
   ```
 
-* To test processing, use Stripe's test card numbers and enter fake info for all fields.  
+* To test payment processing, use Stripe's test card numbers and enter fake info for all fields.  
   ```sh
   card info: 
   4242 4242 4242 4242
