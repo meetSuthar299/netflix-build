@@ -17,23 +17,31 @@ function Row({ title, fetchUrl, islargRow = false }) {
 
     return <div className="row">
         <h2>{title}</h2>
+
         <div className="rowPosters">
-        {movies.map(
-                (movie) =>
-                (
-                    (islargRow && movie.poster_path) || (!islargRow && movie.backdrop_path)
-                )
-                &&
-                (
-                    <img
-                        className={`rowPoster ${islargRow && "rowPosterLarge"}`}
-                        key={movie.id}
-                        src={`${baseURL}${islargRow ? movie.poster_path : movie.backdrop_path}`}
-                        alt={movie.name}
-                    />
-                )
-            )}
+            {movies?.map((movie) => {
+                const isPosterAvailable = islargRow ? movie.poster_path : movie.backdrop_path;
+                if (!isPosterAvailable) return null;
+
+                const posterPath = islargRow ? movie.poster_path : movie.backdrop_path;
+                const posterSize = islargRow ? "rowPosterLarge" : "";
+                const altText = movie?.title || movie?.name || movie?.original_name;
+
+                return (
+                    <>
+                        <img
+                            className={`rowPoster ${posterSize}`}
+                            src={`${baseURL}${posterPath}`}
+                            alt={altText}
+                            title={altText}
+                        />
+                        <h5 className="movieTitle">{altText}</h5>
+                    </>
+                );
+            })}
         </div>
+
+
     </div>
 }
 

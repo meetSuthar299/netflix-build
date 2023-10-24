@@ -31,3 +31,10 @@
 .rowPosterLarge{
     max-height: 250px;
 }
+.movieTitle{
+    position: relative;
+    display: flex;
+}
+.movieTitle:hover{
+    opacity: 1;
+}
