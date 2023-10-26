@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Row.css"
-import axios from "./axios";
+import axios from "../axios";
 import { useNavigate, createSearchParams } from "react-router-dom";
 
 function Row({ title, fetchUrl, islargRow = false }) {
@@ -41,6 +41,9 @@ function Row({ title, fetchUrl, islargRow = false }) {
                                         search: createSearchParams({
                                             movieId: movie?.id,
                                             movieName: movie?.title || movie?.name || movie?.original_name,
+                                            movieOverview: movie?.overview,
+                                            movieReleaseDate: movie?.release_date,
+                                            movieBackground: movie?.backdrop_path,
                                         }).toString()
                                     });
                                 }

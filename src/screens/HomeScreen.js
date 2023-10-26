@@ -1,8 +1,8 @@
 import React from "react";
 import "./HomeScreen.css";
-import Nav from "../Nav";
-import Banner from "../Banner"
-import Row from "../Row"
+import Nav from "../screensComponents/Nav";
+import Banner from "../screensComponents/Banner"
+import Row from "../screensComponents/Row"
 import requests from "../Requests";
 
 
@@ -26,7 +26,7 @@ function HomeScreen() {
             <Row title="Fantasy Movies" fetchUrl={requests.fetchFantasyMovies}/>
             <Row title="Horror Movies" fetchUrl={requests.fetchHorrorMovies}/>
             <Row title="Music Movies" fetchUrl={requests.fetchMusicMovies}/>
-
+            <Row title="Mystery Movies" fetchUrl={requests.fetchMysteryMovies}/>
             <Row title="Romance Movies" fetchUrl={requests.fetchRomanceMovies}/>
             <Row title="Documentries" fetchUrl={requests.fetchDocumentries}/>
         </div>

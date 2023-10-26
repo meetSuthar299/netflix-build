@@ -1,6 +1,6 @@
 import React from 'react'
 import "./ProfileScreen.css"
-import Nav from '../Nav'
+import Nav from '../screensComponents/Nav'
 import { useSelector } from 'react-redux'
 import { selectuser } from '../features/userSlice'
 import { auth } from '../firebase'
