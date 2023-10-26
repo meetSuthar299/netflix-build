@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./Row.css"
 import axios from "./axios";
+import { useNavigate, createSearchParams } from "react-router-dom";
 
 function Row({ title, fetchUrl, islargRow = false }) {
     const [movies, setMovies] = useState();
-
+    const navigate = useNavigate();
     const baseURL = "https://image.tmdb.org/t/p/original/";
+
+
     useEffect(() => {
         async function fetchData() {
             const request = await axios.get(fetchUrl);
@@ -31,6 +34,17 @@ function Row({ title, fetchUrl, islargRow = false }) {
                 return (
                     <div className={`rowPoster ${posterSize}`} key={movie.id}>
                         <img
+                            onClick={
+                                () => {
+                                    navigate({
+                                        pathname: "/movie",
+                                        search: createSearchParams({
+                                            movieId: movie?.id,
+                                            movieName: movie?.title || movie?.name || movie?.original_name,
+                                        }).toString()
+                                    });
+                                }
+                            }
                             className={`rowPosterImg ${posterImg}`}
                             src={`${baseURL}${posterPath}`}
                             alt={altText}

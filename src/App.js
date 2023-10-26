@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import HomeScreen from './screens/HomeScreen';
+import MovieScreen from './screens/MovieScreen';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginScreen from './screens/LoginScreen';
 import { auth } from './firebase';
@@ -41,6 +42,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomeScreen />} />
             <Route path="/profile" element={<ProfileScreen />} />
+            <Route path="/movie" element={<MovieScreen />} />
           </Routes>
         )}
 
