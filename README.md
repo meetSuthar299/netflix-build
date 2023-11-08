@@ -8,6 +8,7 @@ Visit the site [here](http://<your-github-username>.github.io/<your-repo-name>).
 
 - **ReactJS**: The entire application is built with ReactJS, a powerful JavaScript library for building user interfaces.
 - **Firebase Authentication**: User authentication is handled securely using Firebase. Sign up, log in, and experience the app as a unique user.
+- **Firestore Integration**: Enhancing user experience with the ability to store and access liked movies anytime within your login.
 - **Redux**: State management is handled efficiently and predictably with Redux, ensuring that the app's behavior is consistent.
 - **Stripe Payment**: Test the payment functionality with Stripe's secure payment processing. Don't worry, it's all simulated for testing purposes!
 - **TMDB API**: Movie data is populated using the TMDB API, providing a realistic and dynamic selection of movies.
