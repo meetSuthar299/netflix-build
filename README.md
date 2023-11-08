@@ -1,8 +1,8 @@
-# Netflix Clone
+# Netflix Clone 
 
 Welcome to the Netflix clone! This project is a faithful recreation of the popular streaming service, Netflix, built to showcase my skills and passion for web development.
 
-![Netflix Clone Preview](./preview.png)
+Visit the site [here](http://<your-github-username>.github.io/<your-repo-name>).
 
 ## Features 🚀
 
@@ -14,22 +14,22 @@ Welcome to the Netflix clone! This project is a faithful recreation of the popul
 
 ## Getting Started 🏁
 
-Visit the site [here](https://meetsuthar299.github.io/netflix-build/#/).
+Visit the site [here](http://<your-github-username>.github.io/<your-repo-name>).
 
 ### Login to the site
 You can create your own account or use the following test credentials:
 ```sh
 email: netflixclone@gmail.com
 password: 123456
+```
 
-### Exploring Payment Functionality 💳
-
+### Exploring Payment Functionality 💳.
 This application uses Stripe for secure payment processing. To simulate a payment and explore this feature, you can use Stripe's test card information. Don't worry, no actual transactions will occur!
 
 Here's the test card information you can use:
-
-```sh
-Card Number: 4242 4242 4242 4242
+  ```sh
+  Card Number: 4242 4242 4242 4242
 Expiration Date: Any future date
 CVC: Any 3 digits
 Zip Code: Any 5 digits
+  ```
