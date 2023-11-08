@@ -14,6 +14,7 @@ function Nav() {
     const user = useSelector(selectuser);
     const [showMovies, setShowMovies] = useState(false);
 
+    // Transition the navbar from transparent to black
     const transitionNavBar = () => {
         if (window.scrollY > 100) {
             handleShow(true);
@@ -22,6 +23,7 @@ function Nav() {
         }
     }
 
+    // Add an event listener to the window
     useEffect(
         () => {
             window.addEventListener("scroll", transitionNavBar);
@@ -30,6 +32,7 @@ function Nav() {
         []
     );
 
+    // Get the user's liked movies from the database and set them to the movies state.
     useEffect(() => {
         // Check if user and user.id are defined
         if (user && user.uid) {
@@ -45,11 +48,13 @@ function Nav() {
         setShowMovies(!showMovies);
     };
 
+    // Remove a movie from the user's liked movies 
     const removeMovie = async (movieId) => {
         const movieRef = await getDocs(
             query(
                 collection(db, "customers", user.uid, "likes"),
                 where("movie_id", "==", movieId)
+
             )
         );
         movieRef.forEach(async (doc) => {
@@ -80,6 +85,7 @@ function Nav() {
                                 <div>
                                     <h3>Liked Movies:</h3>
                                     <br />
+                                    {/* Loop through the movies array and display the movie name and a trash icon */}
                                     {movies.map((movie) => (
                                         <div key={movie.movie_id} className="movie-item">
                                             <p className="movie-name">{movie.movie_name}</p>

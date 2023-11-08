@@ -1,10 +1,11 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 import { getFirestore } from 'firebase/firestore/lite';
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB7GabKg0MrGjshuu76dyDiDpV9Egy1hlM",
   authDomain: "netflix-clone-a23bc.firebaseapp.com",
+  databaseURL: "https://netflix-clone-a23bc-default-rtdb.firebaseio.com",
   projectId: "netflix-clone-a23bc",
   storageBucket: "netflix-clone-a23bc.appspot.com",
   messagingSenderId: "74480555678",
