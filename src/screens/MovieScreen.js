@@ -2,82 +2,109 @@ import React, { useEffect, useState } from "react";
 import "./MovieScreen.css";
 import Nav from "../screensComponents/Nav";
 import { useSearchParams } from "react-router-dom";
-import { useSelector } from 'react-redux';
-import { selectuser } from '../features/userSlice';
-import { loadStripe } from "@stripe/stripe-js";
-import ReactPlayer from 'react-player/lazy';
 import axios from "../axios";
-import Banner from "../screensComponents/Banner";
+import YouTube from "react-youtube";
+
 
 function MovieScreen() {
     const [searchParams] = useSearchParams();
     const movieId = searchParams.get("movieId");
     const movieName = searchParams.get("movieName");
-    const [selectedType, setSelectedType] = useState('All');
-
+    const [selectedType, setSelectedType] = useState('Trailer');
     const fetchUrl = `/movie/${movieId}/videos?api_key=49a801f5d312edfe6ce11941fbbbecc2`;
     const [videos, setVideos] = useState([]);
+    const [loadedVideos, setLoadedVideos] = useState([]); 
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get(fetchUrl);
-            setVideos(response?.data.results);
+            try {
+                const response = await axios.get(fetchUrl);
+                const videoData = response?.data?.results;
+                setVideos(videoData);
+
+                // Load only video thumbnails initially
+                setLoadedVideos(videoData.map(video => {
+                    return {
+                        ...video,
+                        loaded: false,
+                        thumbnailUrl: `https://img.youtube.com/vi/${video.key}/0.jpg`,
+                    };
+                }));
+            } catch (error) {
+                console.error(error);
+            }
         };
         fetchData();
     }, [fetchUrl]);
+
+    const loadVideo = (video) => {
+        // Load a video when it's clicked
+        if (!video.loaded) {
+            video.loaded = true;
+            setLoadedVideos([...loadedVideos]);
+        }
+    };
 
     const handleChange = (event) => {
         setSelectedType(event.target.value);
     };
 
-    const filteredVideos = selectedType === 'All' ? videos : videos.filter(video => video.type === selectedType);
+    const filterVideosByType = (videos, selectedType) => {
+        if (selectedType === 'All') {
+            return videos;
+        } else {
+            return videos?.filter(video => video?.type === selectedType);
+        }
+    };
+
+    const filteredVideos = filterVideosByType(loadedVideos, selectedType);
 
     return (
         <div className="movieScreen">
             <Nav />
-            {/* <Banner/> */}
-
-            <div
-                className="banner"
-                style={{
-                    backgroundSize: "cover",
-                    backgroundImage: `url("https://image.tmdb.org/t/p/original/${searchParams.get("movieBackground")}")`,
-                    backgroundPosition: "center center",
-                }}
-            >
-                <div className="bannerContents">
-                    <h1 className="bannerTitle">{movieName}</h1>
-                    <h1 className="bannerDiscription">
-                        {searchParams.get("movieOverview")}
-                    </h1>
-                    <br/>
-                    <br/>
-                    <h4>Release Date:</h4>
-                    <p>{searchParams.get("movieReleaseDate")}</p>
+            <div className="movieScreenContainer">
+                <div className="movieScreenMovieInfo">
+                    <div
+                        className="movieScreenMovieBanner"
+                        style={{
+                            backgroundImage: `url("https://image.tmdb.org/t/p/original/${searchParams?.get("movieBackground")}")`,
+                        }}
+                    ></div>
+                    <div className="movieScreenMovieContent">
+                        <h1 className="movieScreenMovieBannerTitle">{movieName}</h1>
+                        <p className="movieScreenMovieBannerDescription">
+                            {searchParams?.get("movieOverview")}
+                        </p>
+                        <h4>Release Date:</h4>
+                        <p>{searchParams?.get("movieReleaseDate")}</p>
+                    </div>
                 </div>
-                <div className="bannerFadeBottom" />
-            </div>
-
-            <div className="movieScreenmovieInfo">
-
-            </div>
-            <br />
-            <select value={selectedType} onChange={handleChange}>
-                <option value="All">All</option>
-                {[...new Set(videos.map(v => v.type))].map((type, index) => (
-                    <option key={index} value={type}>{type}</option>
-                ))}
-            </select>
-            {filteredVideos.map((video) => (
-                <div key={video.id} className="movieScreenmovie">
-                    <h3 className="movieScreenmovieType">{video.name}</h3>
-                    <ReactPlayer
-                        className="movieScreenmoviePlayer"
-                        url={`https://www.youtube.com/watch?v=${video.key}`}
-                        controls={true}
-                    />
+                <div className="movieScreenMovieDropdown">
+                    <label id="movieSelect">
+                        <select value={selectedType} onChange={handleChange}>
+                            <option value="All">All</option>
+                            {[...new Set(videos?.map(v => v.type))].map((type, index) => (
+                                <option key={index} value={type}>{type}s</option>
+                            ))}
+                        </select>
+                    </label>
                 </div>
-            ))}
+                <div className="movieScreenMovieList">
+                    {filteredVideos.map((video) => (
+                        <div key={video?.id} className="movieScreenMovie" onClick={() => loadVideo(video)}>
+                            <h3 className="movieScreenMovieType">{video?.name}</h3>
+                            {video.loaded ? (
+                                <YouTube
+                                    videoId={video?.key}
+                                    opts={{ playerVars: { controls: 1 } }}
+                                />
+                            ) : (
+                                <img src={video.thumbnailUrl} alt="Video Thumbnail" />
+                            )}
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 }

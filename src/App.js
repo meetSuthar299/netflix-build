@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './App.css';
 import HomeScreen from './screens/HomeScreen';
 import MovieScreen from './screens/MovieScreen';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginScreen from './screens/LoginScreen';
 import { auth } from './firebase';
 import { onAuthStateChanged } from "firebase/auth";
@@ -19,8 +19,6 @@ function App() {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
-        const uid = user.uid;
-        //console.log(user);
         dispatch(login({
           uid: user.uid,
           email: user.email,
@@ -35,7 +33,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <Router>
         {!user ? (
           <LoginScreen />
         ) : (
@@ -46,7 +44,7 @@ function App() {
           </Routes>
         )}
 
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }

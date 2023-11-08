@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import db from '../firebase';
-import { collection, getDocs, addDoc, doc, query, getDoc } from 'firebase/firestore/lite';
+import { collection, getDocs, addDoc, doc, getDoc } from 'firebase/firestore/lite';
 import './PlansScreen.css'
 import { useSelector } from 'react-redux';
 import { selectuser } from '../features/userSlice';
@@ -22,9 +22,7 @@ function PlansScreen() {
                 });
             })
         });
-    }, []);
-    //console.log(subscription);
-
+    }, [user.uid]);
     useEffect(() => {
         getDocs(collection(db, 'products')).then((querySnapshot) => {
             const products = {};
@@ -43,7 +41,7 @@ function PlansScreen() {
     }, []);
 
     const loadCheckout = async (priceId) => {
-        await query(addDoc(collection(db, "customers", user.uid, "checkout_sessions"), {
+        await addDoc(collection(db, "customers", user.uid, "checkout_sessions"), {
             price: priceId,
             success_url: window.location.origin,
             cancel_url: window.location.origin,
@@ -58,43 +56,7 @@ function PlansScreen() {
                     sessionId: sessionId
                 })
             })
-        );
-
-        // async function createCheckoutSession(db, user, priceId) {
-        //     const docRef = await addDoc(collection(db, "customers", user.uid, "checkout_sessions"), {
-        //         price: priceId,
-        //         success_url: window.location.origin,
-        //         cancel_url: window.location.origin,
-        //     });
-        //     return docRef;
-        // }
-
-        // async function getStripeSession(db, user, docID) {
-        //     const docRef = doc(db, `customers`, `${user.uid}`, `checkout_sessions`, `${docID}`);
-        //     const docSnap = await getDoc(docRef);
-        //     return docSnap.data()?.sessionId;
-        // }
-
-        // async function redirectToCheckout(sessionId) {
-        //     const stripe = await loadStripe('pk_test_51O2i6sKN7HBR3gDsJB1SjUSvTCtCZpakf3YWvhoCPPwTNh3Ea48Fo8t3EHSkCgLdBTCKNs9qLHPQKBEA2iO0RHoi00N0ammg2m');
-        //     stripe.redirectToCheckout({
-        //         sessionId: sessionId
-        //     });
-        // }
-
-        // // Usage
-        // createCheckoutSession(db, user, priceId)
-        //     .then((docRef) => {
-        //         setDocID(docRef.id);
-        //         return getStripeSession(db, user, docRef.id);
-        //     })
-        //     .then((sessionId) => {
-        //         console.log("Session ID: ", sessionId);
-        //         redirectToCheckout(sessionId);
-        //     })
-        //     .catch((error) => {
-        //         console.error("Error creating checkout session: ", error);
-        //     });
+        ``
 
     };
     return (

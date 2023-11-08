@@ -1,10 +1,10 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchCount } from './counter/counterAPI';
+import {createSlice } from '@reduxjs/toolkit';
+// import { fetchCount } from './counter/counterAPI';
 
-const initialState = {
-  value: 0,
-  status: 'idle',
-};
+// const initialState = {
+//   value: 0,
+//   status: 'idle',
+// };
 
 export const userSlice = createSlice({
   name: 'user',

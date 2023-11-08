@@ -1,41 +1,140 @@
-body {
-    margin: 0;
+/* MovieScreen.css */
+.movieScreen {
     background-color: #000;
     color: #fff;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-.movieScreen {
-    max-width: 1200px;
-    padding: 2em;
-    margin: 0 auto;
-    background-color: #141414;
-}
-
-.movieScreen .movieTitle {
-    font-size: 3em;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 1em;
-}
-
-.movieScreen .movieInfo {
-    font-size: 1.2em;
-    line-height: 1.5;
-    margin-bottom: 2em;
-}
-
-.movieScreen select {
-    display: block;
-    width: 100%;
-    padding: 0.5em;
-    margin-bottom: 2em;
-    background-color: #333;
-    color: #fff;
-    border-radius: 4px;
-}
-
-.movieScreen .movie {
+    padding: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  }
+  
+  .movieScreenContainer {
     display: flex;
     flex-direction: column;
-}
+  }
+  
+  .movieScreenMovieInfo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  
+  .movieScreenMovieBanner {
+    width: 100%;
+    height: 400px;
+    background-size: cover;
+    
+    background-position: center center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.7);
+  }
+  
+  .movieScreenMovieContent {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .movieScreenMovieBannerTitle {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .movieScreenMovieBannerDescription {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  
+  h4 {
+    font-size: 20px;
+    margin: 20px 0 10px;
+  }
+  
+  p {
+    font-size: 18px;
+  }
+  
+  .movieScreenMovieDropdown {
+    margin: 20px 0;
+    text-align: center; /* Center the text (including the select element) horizontally */
+  }
+  
+  select {
+    background-color: #222;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif; /* Use a modern font-family, or specify your preferred one */
+    color: #fff; /* Text color */
+    width: 100%;
+    max-width: 500px;
+    border: 2px solid #e50914;
+    border-radius: 5px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='6' fill='%23e50914' viewBox='0 0 12 6'%3E%3Cpath d='M6 5.9L0 0h12L6 5.9z'%3E%3C/path%3E%3C/svg%3E");
+    background-size: 10px;
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+  }
+  
+  select:hover, select:focus {
+    border-color: #e50914;
+  }
+  .movieScreenMovieList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+    justify-content: center; /* Add this line to center the items horizontally */
+  }
+  
+  .movieScreenMovie {
+    background-color: #222;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+    align-content: center;
+    text-align: center;
+  }
+  
+  .movieScreenMovieType {
+    font-size: 20px;
+    padding: 14px;
+    margin: 0;
+  }
+  
+  .movieScreenMoviePlayer {
+    border-top: 1px solid #222;
+    
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .movieScreenMovieInfo {
+      flex-direction: column;
+    }
+  
+    .movieScreenMovieContent {
+      padding: 20px;
+    }
+  
+    .movieScreenMovieBannerTitle {
+      font-size: 24px;
+    }
+  
+    .movieScreenMovieBannerDescription {
+      font-size: 16px;
+    }
+  
+    h4 {
+      font-size: 18px;
+      margin: 20px 0 10px;
+    }
+  }
+  
