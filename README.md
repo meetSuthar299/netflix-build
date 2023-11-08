@@ -30,7 +30,7 @@ This application uses Stripe for secure payment processing. To simulate a paymen
 Here's the test card information you can use:
   ```sh
   Card Number: 4242 4242 4242 4242
-Expiration Date: Any future date
-CVC: Any 3 digits
-Zip Code: Any 5 digits
+  Expiration Date: Any future date
+  CVC: Any 3 digits
+  Zip Code: Any 5 digits
   ```
