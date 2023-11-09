@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./LoginScreen.css"
 import SignInScreen from "./SignInScreen";
-
+import logo from "../assets/logo.png";
 function LoginScreen() {
     const [signIn, setSignIn] = useState(false);
 
@@ -10,8 +10,8 @@ function LoginScreen() {
             <div className="LoginScreenBackground">
                 <img
                     className="loginScreenLogo"
-                    src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
-                    alt=""
+                    src={logo}
+                    alt="fakeflix logo"
                 />
                 <button className="LoginScreenButton" onClick={() => setSignIn(true)}>
                     Sign In

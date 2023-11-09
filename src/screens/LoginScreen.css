@@ -1,7 +1,7 @@
 .loginScreen{
     position: relative;
     height: 100%;
-    background: url("https://assets.nflxext.com/ffe/siteui/vlv3/ab180a27-b661-44d7-a6d9-940cb32f2f4a/f9a24fdc-ab8b-4e19-b0f5-4923356a72de/CA-en-20231009-popsignuptwoweeks-perspective_alpha_website_medium.jpg")
+    background: url("/src/assets/loginBackground.png")
     center no-repeat;
     background-size: cover;
 }

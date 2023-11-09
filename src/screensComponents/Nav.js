@@ -6,6 +6,8 @@ import { collection, getDocs, deleteDoc, query, where } from 'firebase/firestore
 import db from '../firebase';
 import { useSelector } from 'react-redux';
 import { selectuser } from '../features/userSlice';
+import logo from '../assets/logo.png';
+import avatar from "../assets/Netflix-avatar.png"
 
 function Nav() {
     const [show, handleShow] = useState(false);
@@ -69,7 +71,7 @@ function Nav() {
                 <img
                     onClick={() => { navigate('/') }}
                     className="navLogo"
-                    src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
+                    src= {logo}
                     alt="Netflix"
                 />
 
@@ -105,7 +107,7 @@ function Nav() {
                 <img
                     onClick={() => { navigate("/profile") }}
                     className="navAvatar"
-                    src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
+                    src={avatar}
                     alt="Profile"
                 />
             </div>
